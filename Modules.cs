@@ -2,67 +2,65 @@
 
 namespace CalculatorModules
 {
-	class BeregnerClass 
+	class Calculator 
 	{
-		// Foretager simple regneoperationer [+,-,*,/]
-		public double Beregner (double num1, double num2, string operand) 
+		// Handles simple math operations with 2 arguments and a operator
+		public double calculateResult (double argument_1, double argument_2, char input_operator) 
 		{ 
-			double answer = 0; 
-
-			switch (operand) 
+			double result;
+			switch (input_operator) 
 			{
 				case "+":
-					answer = num1 + num2;
+					answer = argument_1 + argument_2;
 					break; 
 
 				case "-":
-					answer = num1 - num2;
+					answer = argument_1 - argument_2;
 					break;
 
 				case "*":
-					answer = num1 * num2;
+					answer = argument_1 * argument_2;
 					break;
 
 				case "/":
-					answer = num1 / num2; 
+					answer = argument_1 / argument_2; 
 					break;
 
-					default: 
-					answer = 0; 
+				default: 
+					Console.WriteLine("Invalid operator; please try from the following [+,-,*,/]");
 					break; 
 			}
-			return answer; 
-		}
 
+			return result; 
+		}
 	}
 
-	class UdvidedeBeregningerClass : BeregnerClass
+	class CalculatorExtension : Calculator
 	{ 
-		// Udvidelse af de regneoperationer der kan foretages af Beregner metoden
-		public double Beregner2 (double num1, double num2, string operand) 
+		// Extension layer allowing for calculation of ^(power of)
+		public double _calculateResult (double argument_1, double argument_2, char input_operator) 
 		{  
-			double answer = 0; 
+			double result = 0; 
 
-			if (operand == "+" || operand == "-" || operand == "*" || operand == "/") 
+			//	In case of simple operator, call calculateResult()
+			if (input_operator == "+" || input_operator == "-" || input_operator == "*" || input_operator == "/") 
 			{ 
-				answer = Beregner (num1, num2, operand); 
-				return answer; 
+				result = calculateResult (argument_1, argument_2, input_operator); 
+				return result; 
 			} 
-			else 
-			{
-				switch (operand) 
-				{
-				case "^": 
-					answer = Math.Pow (num1, num2); 
+			else {
+				switch (input_operator) {
+					case "^": 
+						result = Math.Pow (argument_1, argument_2); 
 						break;
 
 					default: 
-						answer = 0; 
+						result = 0; 
 						break; 
 				} 
-				return answer; 
+
+				return result; 
 			}
 		} 
 	}
 }
-	

@@ -1,54 +1,47 @@
 ﻿using System;
 using CalculatorModules; 
 
-
-namespace Calculator0
+namespace Calculator
 {
-	class MainClass
-	{  
-
+	class Controller
+	{
 		public static void Main (string[] args)
 		{
-			//Deklaration af variabler
-			double num1 = 0; 
-			double num2 = 0;
-			double answer = 0;
-			string operand;
-			bool continue2 = true; 
+			double argument_1 = 0; 
+			double argument_2 = 0;
+			double result     = 0;
+			bool   cont       = true;  
+			char   input_operator;
 
-			//Deklaration af klasse [Valg af regneoperation]
-			UdvidedeBeregningerClass udregn = new UdvidedeBeregningerClass ();
+			//	Initialize Calculation Class
+			CalculatorExtension calculator = new CalculatorExtension ();
 
-			// Få input fra bruger. Do while løkken sikre at bruger kan regne videre på sidste resultat samt 
-			//Afslutning af programmet ved at indtaste "q"
+			//	Reading user input
+			//	Terminate application by pressing "q"
 
-				Console.WriteLine ("Indtast dit første tal");
-				num1 = Convert.ToDouble(Console.ReadLine ());
+			Console.WriteLine ("Write your first argument");
+			argument_1 = Convert.ToDouble(Console.ReadLine ());
 
-			do 
-				{
-				
-				Console.WriteLine ("Indtast din operator [+, -, *, /, ^]");
-				operand = Console.ReadLine();
+			do {
+				Console.WriteLine ("Choose an operator [+, -, *, /, ^]");
+				input_operator = Console.ReadLine();
 
-				if(operand == "q")
-					{
-						continue2 = false; 
-					} 
-				else 
-					{
-						Console.WriteLine ("Indtast dit andet tal");
-						num2 = Convert.ToDouble(Console.ReadLine ());
+				if(input_operator == "q"){
+					cont = false; 
+				} 
+				else {
+					Console.WriteLine ("Write your second argument");
+					argument_2 = Convert.ToDouble(Console.ReadLine ());
 						
-						// Kald af klasse som kalder den klasse der indeholde den pågældende regneoperation
-						answer = udregn.Beregner2(num1, num2, operand); 
+					// Calculation result based on user input
+					result = calculator._calculateResult(argument_1, argument_2, input_operator); 
 						
-						//Print af resulatat og videreførsel af resultat til næste cyklus.
-						Console.WriteLine(answer); 
-						num1 = answer; 
-					}
+					//	Print result and await further calculations
+					Console.WriteLine(result); 
+					argument_1 = result; 
 				}
-			while (continue2);
+			}
+			while (cont);
 		}
 	}
 }
