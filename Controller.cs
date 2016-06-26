@@ -11,7 +11,7 @@ namespace Calculator
 			double argument_2 = 0;
 			double result     = 0;
 			bool   cont       = true;  
-			char   input_operator;
+			string input_operator;
 
 			//	Initialize Calculation Class
 			CalculatorExtension calculator = new CalculatorExtension ();
