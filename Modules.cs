@@ -5,25 +5,25 @@ namespace CalculatorModules
 	class Calculator 
 	{
 		// Handles simple math operations with 2 arguments and a operator
-		public double calculateResult (double argument_1, double argument_2, char input_operator) 
+		public double calculateResult (double argument_1, double argument_2, string input_operator) 
 		{ 
-			double result;
+			double result = 0;
 			switch (input_operator) 
 			{
 				case "+":
-					answer = argument_1 + argument_2;
+					result = argument_1 + argument_2;
 					break; 
 
 				case "-":
-					answer = argument_1 - argument_2;
+					result = argument_1 - argument_2;
 					break;
 
 				case "*":
-					answer = argument_1 * argument_2;
+					result = argument_1 * argument_2;
 					break;
 
 				case "/":
-					answer = argument_1 / argument_2; 
+					result = argument_1 / argument_2; 
 					break;
 
 				default: 
@@ -38,9 +38,9 @@ namespace CalculatorModules
 	class CalculatorExtension : Calculator
 	{ 
 		// Extension layer allowing for calculation of ^(power of)
-		public double _calculateResult (double argument_1, double argument_2, char input_operator) 
+		public double _calculateResult (double argument_1, double argument_2, string input_operator) 
 		{  
-			double result = 0; 
+			double result; 
 
 			//	In case of simple operator, call calculateResult()
 			if (input_operator == "+" || input_operator == "-" || input_operator == "*" || input_operator == "/") 
