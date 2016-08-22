@@ -1,7 +1,8 @@
 ﻿using System;
-using CalculatorModules; 
+using Calculation;
+//using CalculatorModules; 
 
-namespace Calculator
+namespace Controller
 {
 	class Controller
 	{
@@ -14,7 +15,8 @@ namespace Calculator
 			string input_operator;
 
 			//	Initialize Calculation Class
-			CalculatorExtension calculator = new CalculatorExtension ();
+			//  CalculatorExtension calculator = new CalculatorExtension ();
+			Calculator calculator = new Calculator();
 
 			//	Reading user input
 			//	Terminate application by pressing "q"
@@ -24,7 +26,8 @@ namespace Calculator
 
 			do {
 				Console.WriteLine ("Choose an operator [+, -, *, /, ^]");
-				input_operator = Console.ReadLine();
+				input_operator = Console.ReadKey().Key.ToString();
+				Console.WriteLine ("\b");
 
 				if(input_operator == "q"){
 					cont = false; 
@@ -34,7 +37,7 @@ namespace Calculator
 					argument_2 = Convert.ToDouble(Console.ReadLine ());
 						
 					// Calculation result based on user input
-					result = calculator._calculateResult(argument_1, argument_2, input_operator); 
+					result = calculator.calculateResult(argument_1, argument_2, input_operator); 
 						
 					//	Print result and await further calculations
 					Console.WriteLine(result); 
