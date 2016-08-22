@@ -1,45 +1,38 @@
 ﻿using System;
+using System.Reflection;
 
 namespace Calculation
 {
 	class Calculator
 	{
-		public double calculateResult(double argument_1, double argument_2, string input_operator){
-			
-			/*DEBUG: Output given input to console*/
-			//Console.WriteLine("TICK: " + input_operator);
-			
-			switch (input_operator) {
-				case "OemPlus":
-					return addition(argument_1, argument_2);
-				case "OemMinus":
-					return subtraction(argument_1, argument_2);
-				case "Oem2":
-					return multiply(argument_1, argument_2);
-				case "D7":
-					return divide(argument_1, argument_2);
-				case "Oem1":
-					return powerOf(argument_1, argument_2);
-				default: 
-					Console.WriteLine("Invalid operator; please try from the following [+,-,*,/]");
-					return 0.0; 
-			}
+		private double result;
+		private double argument_1;
+		private double argument_2;
+
+		public double calculateResult(double argument_1, double argument_2, string input_operator){		
+			this.argument_1 = argument_1;
+			this.argument_2 = argument_2;
+
+			MethodInfo theMethod = this.GetType().GetMethod(input_operator);
+			theMethod.Invoke(this, null);
+
+			return result;
 		}
 
-		private double addition(double argument_1, double argument_2){
-			return argument_1 + argument_2;
+		public void addition(){
+			this.result = this.argument_1 + this.argument_2;
 		}
-		private double subtraction(double argument_1, double argument_2){
-			return argument_1 - argument_2;
+		public void subtraction(){
+			this.result = this.argument_1 - this.argument_2;
 		}
-		private double multiply(double argument_1, double argument_2){
-			return argument_1 * argument_2;
+		public void multiply(){
+			this.result = this.argument_1 * this.argument_2;
 		}
-		private double divide(double argument_1, double argument_2){
-			return argument_1 / argument_2;
+		public void divide(){
+			this.result = this.argument_1 / this.argument_2;
 		}
-		private double powerOf(double argument_1, double argument_2){
-			return Math.Pow (argument_1, argument_2); 		
+		public void powerOf(){
+			this.result = Math.Pow (this.argument_1, this.argument_2); 		
 		}
 	}
 }
