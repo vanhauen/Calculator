@@ -1,7 +1,8 @@
 ﻿using System;
-using CalculatorModules; 
+using Calculation;
+using InputHandling;
 
-namespace Calculator
+namespace Controller
 {
 	class Controller
 	{
@@ -10,38 +11,36 @@ namespace Calculator
 			double argument_1 = 0; 
 			double argument_2 = 0;
 			double result     = 0;
-			bool   cont       = true;  
+			bool   run        = true;  
 			string input_operator;
 
-			//	Initialize Calculation Class
-			CalculatorExtension calculator = new CalculatorExtension ();
+			//	Initialize Classes
+			Calculator calculator = new Calculator();
+			Input      input      = new Input();
 
-			//	Reading user input
-			//	Terminate application by pressing "q"
-
-			Console.WriteLine ("Write your first argument");
-			argument_1 = Convert.ToDouble(Console.ReadLine ());
-
+			// Read first number
+				Console.WriteLine ("Write your first argument");
+				argument_1 = input.readNumber();
+			
+			//	Initiate run-cycle
 			do {
+				// Read operator
 				Console.WriteLine ("Choose an operator [+, -, *, /, ^]");
-				input_operator = Console.ReadLine();
+				input_operator = input.readOperator();
 
-				if(input_operator == "q"){
-					cont = false; 
-				} 
-				else {
-					Console.WriteLine ("Write your second argument");
-					argument_2 = Convert.ToDouble(Console.ReadLine ());
+				// Read second number
+				Console.WriteLine ("\bWrite your second argument");
+				argument_2 = input.readNumber();
 						
-					// Calculation result based on user input
-					result = calculator._calculateResult(argument_1, argument_2, input_operator); 
+				// Calculation result based on user input
+				result = calculator.calculateResult(argument_1, argument_2, input_operator); 
 						
-					//	Print result and await further calculations
-					Console.WriteLine(result); 
-					argument_1 = result; 
-				}
+				//	Print result and await further calculations
+				Console.WriteLine(result); 
+				argument_1 = result; 
+				
 			}
-			while (cont);
+			while (run);
 		}
 	}
 }
